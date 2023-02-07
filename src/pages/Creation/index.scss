@@ -1,0 +1,35 @@
+.creation-container {
+    padding-top: 3%;
+}
+
+.creation-component-interval {
+    margin-bottom: 1%;
+}
+
+.preview-container {
+    border-radius: 5;
+    padding-left: 18;
+    padding-right: 18;
+
+    p {
+        word-break: break-all;
+    }
+
+    img {
+        width: 45%;
+        margin-left: 15%;
+        margin-right: 40%;
+    }
+}
+
+#img-upload {
+    display: none;
+}
+
+.feature-bar-label {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}

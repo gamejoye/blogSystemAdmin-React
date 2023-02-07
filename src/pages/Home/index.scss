@@ -1,0 +1,16 @@
+.home-left {
+    width: 60%;
+    padding: 3%;
+}
+
+.home-right {
+    width: 40%;
+    padding: 2%;
+}
+
+.blog-content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden
+}
