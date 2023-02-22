@@ -1,0 +1,11 @@
+.about-me-container {
+    width: 60%;
+    img {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+#img-upload {
+    display: none;
+}

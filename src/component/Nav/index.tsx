@@ -1,4 +1,4 @@
-import { HomeOutlined, SettingOutlined, MenuOutlined } from "@ant-design/icons";
+import { HomeOutlined, SettingOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
 import { MenuInfo } from "rc-menu/lib/interface";
 import { useNavigate } from "react-router";
@@ -26,6 +26,10 @@ const items: MenuItem[] = [
     getItem('动态', '/dynamic', <MenuOutlined />, [
         getItem('说说', TALKS),
         getItem('随笔', ESSAY),
+    ]),
+    getItem('关于', '/about', <UserOutlined/>, [
+        getItem('关于我', 'introduction'),
+        getItem('关于建站', 'establish-site')
     ]),
     getItem('设置', '/settings', <SettingOutlined />, [
         getItem('发表博客', CREATION),

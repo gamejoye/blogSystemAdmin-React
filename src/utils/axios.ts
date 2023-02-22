@@ -31,11 +31,16 @@ const authenticateUser = (user: {
 }
 
 const getUserInfo = (token: string) => {
+    
     return getInstance.get(`user/introduction/${token}`)
 };
 
-const updateUserInfo = (data: IUserInfo) => {
+const putUserInfo = (data: IUserInfo) => {
     return putInstance.put(`user/introduction/${data.name}`, data);
+}
+
+const postUserImage = (formData: FormData) => {
+    return postInstance.post(`user/image`, formData);
 }
 
 const getAllBlogs = (name: string) => {
@@ -43,7 +48,7 @@ const getAllBlogs = (name: string) => {
 }
 
 const postBlog = (formData: FormData, blog: IBlog) => {
-    return postInstance.post('files/images', formData)
+    return postInstance.post('user/images', formData)
         .then(res => res.data)
         .then(content => {
             return postInstance.post('blog', { ...blog, content });
@@ -84,7 +89,8 @@ export {
 
 export {
     getUserInfo,
-    updateUserInfo
+    putUserInfo,
+    postUserImage
 }
 
 export {

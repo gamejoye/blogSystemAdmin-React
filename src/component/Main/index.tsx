@@ -5,6 +5,7 @@ import { CREATION, TALKS } from "../../contants/routeName"
 import './index.scss'
 import Talks from "../../pages/Talks"
 import Creation from "../../pages/Creation"
+import AboutMe from "../../pages/AboutMe"
 const Main = () => {
     return (
         <main className="main">
@@ -13,6 +14,9 @@ const Main = () => {
                     <Route path="/" element={<Home />} />
                     <Route path={TALKS} element={<Talks />} />
                     <Route path={CREATION} element={<Creation />} />
+                    <Route>
+                        <Route path="/introduction" element={<AboutMe />} />
+                    </Route>
                 </Routes>
             </Suspense>
         </main>

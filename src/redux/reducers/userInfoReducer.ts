@@ -1,19 +1,30 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getUserInfo } from "../../utils/axios";
+import { getUserInfo, postUserImage, putUserInfo } from "../../utils/axios";
 import { IUserInfo } from "../../types";
 export const loadUserInfo = createAsyncThunk<IUserInfo, string>('userInfo/loadUserInfo', async (token) => {
     const userInfo = (await getUserInfo(token)).data;
     return userInfo;
 });
+export const uploadUserImage = createAsyncThunk<string, FormData>('userInfo/uploadUserImage', async (formData) => {
+    const imageUrl = (await postUserImage(formData)).data;
+    return imageUrl;
+})
+export const updateUserInfo = createAsyncThunk<IUserInfo | null, IUserInfo>('userInfo/updateUserInfo', async (userInfo) => {
+    const ok = (await putUserInfo(userInfo)).data;
+    if (ok) return userInfo;
+    return null;
+})
 
 interface IInitial {
     status: string;
+    avatarUrlStatus: string;
     info: IUserInfo;
     error: string;
 }
 
 const initial: IInitial = {
-    status: '',
+    status: 'idle',
+    avatarUrlStatus: 'idle',
     info: {
         avatarUrl: '',
         name: '',
@@ -50,6 +61,24 @@ export const userInfoSlice = createSlice({
                 state.status = 'falied';
                 const { message } = action.error;
                 state.error = message ? message : "";
+            })
+            .addCase(updateUserInfo.fulfilled, (state, action) => {
+                const { payload } = action;
+                if (payload) state.info = payload;
+            })
+            .addCase(uploadUserImage.pending, (state, action) => {
+                state.avatarUrlStatus = 'loading';
+            })
+            .addCase(uploadUserImage.fulfilled, (state, action) => {
+                const { payload } = action;
+                state.avatarUrlStatus = 'succeeded';
+                state.info.avatarUrl = payload;
+            })
+            .addCase(uploadUserImage.rejected, (state, action) => {
+                state.info.avatarUrl = "";
+                state.avatarUrlStatus = 'failed';
+                const { message } = action.error;
+                state.error = message ?? "";
             })
     }
 });
